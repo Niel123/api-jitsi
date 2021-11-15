@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Route::get('store', 'StoreController@index');
-// Route::post('/login', 'Api\AuthController@login');
+Route::post('/login', 'Api\AuthController@login');
 // Route::post('customer-save', 'Api\CustomerController@store')->middleware('auth:api');
 // Route::get('customer', 'Api\CustomerController@index')->middleware('auth:api');
 
