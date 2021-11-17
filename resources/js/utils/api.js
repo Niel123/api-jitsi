@@ -67,4 +67,15 @@ export default class API
             }
         });
     }
+    static conferenceSave(parameters = {})
+    {  
+        return axios({
+            method: 'post',
+            url: Api+'conference-store',
+            data: parameters,
+             headers: {
+                'Authorization': `Bearer  ${getCookie("access_token")}`,
+            }
+        });
+    }
 }
