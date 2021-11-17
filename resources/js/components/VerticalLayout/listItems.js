@@ -40,11 +40,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Students"  />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/conference">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Call Logs" />
+      <ListItemText primary="Conference" />
     </ListItem>
   </div>
 );
