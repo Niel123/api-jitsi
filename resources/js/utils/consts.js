@@ -1,4 +1,6 @@
-export const Api = "http://127.0.0.1:8000/api/";
+const base_url =  location.protocol + '//' + location.host;
+export const Api = `${base_url}/api/`;
+// export const Api = "http://127.0.0.1:8000/api/";
 
 export const new_customer = "Customer";
 export const new_customer_btn = "New Customer";
