@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Conference;
 use Illuminate\Http\Request;
 
 class JoinCallController extends Controller
@@ -14,7 +14,12 @@ class JoinCallController extends Controller
      */
     public function index(Request $request)
     {
-        return 'https://jitsi.blue-label.link/xavier-con#userInfo.displayName="Niel Daculan"';
+        $conference = Conference::where('conference_name','=',$request->conference_name)->first();
+        if(!$conference){
+            return response()->json("Room name is not exist", 403);
+        }
+        return 'https://jitsi.blue-label.link/'.$request->conference_name.'#userInfo.displayName='.$request->name.'';
+
     }
 
     /**
