@@ -78,4 +78,15 @@ export default class API
             }
         });
     }
+    static userSave(parameters = {})
+    {  
+        return axios({
+            method: 'post',
+            url: Api+'user-store',
+            data: parameters,
+             headers: {
+                'Authorization': `Bearer  ${getCookie("access_token")}`,
+            }
+        });
+    }
 }
