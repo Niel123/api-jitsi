@@ -41,13 +41,26 @@ class ConferenceController extends Controller
     public function store(Request $request)
     {
         try {
+            $exist = Conference::where('conference_name', $request->room_name)->first();
+            if($exist) {
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Conference link already exist',
+                    'exist' => true
+                ], 200);
+            }
             $conference = Conference::create([ 
                 'conference_link'       => $request->room_link,
                 'conference_name'       => $request->room_name,
                 'class_id'              => 0,
             ]);
             DB::commit();
-            return response()->json([ 'result' => true,  'conference' => $conference, 'message' => 'Conference link successfully created!' ], 200);
+            return response()->json([
+                'result' => true,
+                'conference' => $conference,
+                'message' => 'Conference link successfully created!',
+                'exist' => false
+            ], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
