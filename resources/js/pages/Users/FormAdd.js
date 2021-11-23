@@ -47,7 +47,9 @@ function FormAdd({ open, close, submit_form, is_submit, reset_form }) {
 
     const roleList = [
         { name: 'Admin', value: 1 },
-        { name: 'Teacher', value: 2 },
+        { name: 'Instructor', value: 2 },
+        { name: 'Super Admin', value: 3 },
+        { name: 'Org Admin', value: 4 },
     ]
 
     const submitForm = async event => {
@@ -116,7 +118,7 @@ function FormAdd({ open, close, submit_form, is_submit, reset_form }) {
             >
                 <DialogTitle id="scroll-dialog-title">New User</DialogTitle>
                 <DialogContent dividers>
-                    {is_submit ? <><CircleLoading loading_message="Saving student" /> </> : null}
+                    {is_submit ? <><CircleLoading loading_message="Saving user" /> </> : null}
                     <form noValidate onSubmit={submitForm}>
                         <TextInput
                             name="first_name"

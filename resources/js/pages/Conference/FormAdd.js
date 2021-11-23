@@ -46,7 +46,7 @@ function FormAdd({open, close, submit_form, is_submit, reset_form}) {
         }
 
         let params = {
-            room_name: state.room_name,
+            room_name: state.room_name.replace(/\s/g, ''),
         };
         submit_form(params);
     };
@@ -82,6 +82,10 @@ function FormAdd({open, close, submit_form, is_submit, reset_form}) {
                                 })
                             }
                         />
+                        <em style={{
+                            fontSize: 10,
+                            color: 'red',
+                        }}>*Spaces will be omitted</em>
                     </form>
                 </DialogContent>
                 <DialogActions>

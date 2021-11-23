@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import MaterialTable from "material-table";
 import Box from "@material-ui/core/Box";
+import Chip from '@material-ui/core/Chip';
 import { Api, ENPOINT } from "../../utils/consts";
 
 function TableData({ refresh }) {
@@ -30,22 +31,30 @@ function TableData({ refresh }) {
 
     const RoleUser = ({data}) => {
         let userRole = 'Admin';
-        let style = {
-            padding: 5,
-            borderRadius: 5,
-            color: 'white',
-        };
+        let colorChip = '';
         if (data.role === 1) {
             userRole = 'Admin';
-            style.backgroundColor = 'red';
+            colorChip = 'Secondary';
         }
         else if (data.role === 2) {
-            userRole = 'Teacher';
-            style.backgroundColor = 'blue';
+            userRole = 'Instructor';
+        }
+        else if (data.role === 3) {
+            userRole = 'Super Admin';
+            colorChip = 'Primary';
+        }
+        else if (data.role === 4) {
+            userRole = 'Org Admin';
+            colorChip = 'Secondary';
         }
 
         return (
-            <p align={'center'} style={style}>{userRole}</p>
+            // <p align={'center'} style={style}>{userRole}</p>
+            <Chip
+                size="medium"
+                label={userRole}
+                color={colorChip}
+            />
         )
     }
 
