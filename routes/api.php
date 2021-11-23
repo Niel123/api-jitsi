@@ -24,12 +24,12 @@ Route::post('/login', 'Api\AuthController@login');
 // Route::get('customer', 'Api\CustomerController@index')->middleware('auth:api');
 
 
-
 Route::post('join-call', 'JoinCallController@index');
 Route::post('organization-store', 'OrganizationController@store');
 Route::get('student-list', 'StudentsController@index');
 Route::get('organization-list', 'OrganizationController@index');
 Route::get('conference-list', 'ConferenceController@index');
+Route::get('user-list', 'UserController@index');
 
 Route::group([
     'middleware' => 'auth:api'
@@ -37,6 +37,7 @@ Route::group([
     Route::post('student-store', 'StudentsController@store');
     Route::post('class-store', 'ClassController@store');
     Route::post('conference-store', 'ConferenceController@store');
+    Route::post('user-store', 'UserController@store');
 });    
 
 // Route::middleware(['cors'])->group(function () {

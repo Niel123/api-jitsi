@@ -6,6 +6,7 @@ import Schools from '../pages/Schools'
 import Students from '../pages/Students'
 import Class from '../pages/Class'
 import Conference from '../pages/Conference'
+import Users from '../pages/Users'
 
 
 const authRoutes = [
@@ -18,6 +19,7 @@ const userRoutes = [
 	{ path: "/students", component: Students },
 	{ path: "/class", component: Class },
 	{ path: "/conference", component: Conference },
+	{ path: "/users", component: Users },
 ];
 
 
