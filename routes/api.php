@@ -26,6 +26,7 @@ Route::post('/login', 'Api\AuthController@login');
 
 
 Route::post('join-call', 'JoinCallController@index');
+Route::post('update-attendace', 'JoinCallController@updateAttendance');
 Route::post('organization-store', 'OrganizationController@store');
 Route::get('student-list', 'StudentsController@index');
 Route::get('organization-list', 'OrganizationController@index');
