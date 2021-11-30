@@ -14,6 +14,8 @@ class Students extends Component {
             refresh_table: false,
             is_submit: false,
             reset_form: false,
+            user_data: {},
+            is_update: false,
         };
     }
 
@@ -23,33 +25,41 @@ class Students extends Component {
     }
 
     open_addForm() {
-       // this.props.openFormAdd();
+        // this.props.openFormAdd();
     }
 
-    save_user(form){
-        console.log('form', form);
-        // return;
-        this.setState({is_submit: true})
-        Api.userSave(form)
-        .then(result => {
-           setTimeout(()=>{
-              this.setState({refresh_table: true, new_student: false, is_submit: false, reset_form: true})
-           },1000)
-        })
-        .catch(error => {
-            this.setState({is_submit: false})
-        });
+    save_user(form) {
+        const { is_update } = this.state;
+        this.setState({ is_submit: true })
+        let api_endpoint = null;
+        if (is_update) api_endpoint = Api.userUpdate(form);
+        else api_endpoint = Api.userSave(form);
+        api_endpoint
+            .then(result => {
+                setTimeout(() => {
+                    this.setState({
+                        refresh_table: true,
+                        new_student: false,
+                        is_submit: false,
+                        reset_form: true,
+                        user_data: {}
+                    })
+                }, 1000)
+            })
+            .catch(error => {
+                this.setState({ is_submit: false })
+            });
     }
 
- 
+
     render() {
 
-        const { new_student, refresh_table, is_submit, reset_form } = this.state;
+        const { new_student, refresh_table, is_submit, reset_form, user_data } = this.state;
 
         return (
             <React.Fragment>
                 <TopContent
-                    newCustomer={() => this.setState({new_student: true})}
+                    newCustomer={() => this.setState({ new_student: true, is_update: false, user_data: {} })}
                     title="Users"
                     btn="New User"
                 />
@@ -58,10 +68,20 @@ class Students extends Component {
                     is_submit={is_submit}
                     reset_form={reset_form}
                     submit_form={data => this.save_user(data)}
-                    close={() => this.setState({new_student: false})}
+                    close={() => this.setState({ new_student: false })}
+                    update_data={user_data}
                 />
                 <Box style={{ padding: 30 }}>
-                    <Table refresh={refresh_table}  />
+                    <Table
+                        refresh={refresh_table}
+                        update_user={
+                            (data) => this.setState({
+                                new_student: true,
+                                user_data: data,
+                                is_update: true,
+                                reset_form: true
+                            })
+                        } />
                 </Box>
             </React.Fragment>
         );

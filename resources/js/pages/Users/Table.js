@@ -5,9 +5,12 @@ import Paper from "@material-ui/core/Paper";
 import MaterialTable from "material-table";
 import Box from "@material-ui/core/Box";
 import Chip from '@material-ui/core/Chip';
-import { Api, ENPOINT } from "../../utils/consts";
+import Button from '@material-ui/core/Button';
+import Edit from '@material-ui/icons/Edit';
+import FormAdd from "./FormAdd";
+import { Api } from "../../utils/consts";
 
-function TableData({ refresh }) {
+function TableData({ refresh, update_user }) {
     //const [search, setSearch] = useState("");
     const searchRef = useRef('');
 
@@ -20,7 +23,6 @@ function TableData({ refresh }) {
     }, [refresh]);
 
     const setSearch = value => {
-        console.log(value);
         zipRef.current = "value";
     };
 
@@ -49,12 +51,19 @@ function TableData({ refresh }) {
         }
 
         return (
-            // <p align={'center'} style={style}>{userRole}</p>
             <Chip
                 size="medium"
                 label={userRole}
                 color={colorChip}
             />
+        )
+    }
+
+    const UpdateButton = ({data}) => {
+        return (
+            <Button variant="contained" color="primary" onClick={()=>update_user(data)}>
+                <Edit />
+            </Button>
         )
     }
 
@@ -93,8 +102,13 @@ function TableData({ refresh }) {
                         { title: "Email", field: "email" },
                         {
                             field: "Role",
-                            title: 'Actions',
+                            title: 'Role',
                             render: rowData => <RoleUser data={rowData} />,
+                        },
+                        {
+                            field: "Role",
+                            title: 'Actions',
+                            render: rowData => <UpdateButton data={rowData} />,
                         }
                     ]}
                     onSearchChange={setSearch}

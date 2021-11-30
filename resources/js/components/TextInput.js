@@ -22,10 +22,6 @@ export default function TextInput(props) {
     custom_attr = {...custom_attr, multiline: true, rows: props.rows};
   }
 
-  
-
-  
-
   //custom_attr = {...custom_attr, disabled: true};
   
   return (

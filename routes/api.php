@@ -38,6 +38,7 @@ Route::group([
     Route::post('class-store', 'ClassController@store');
     Route::post('conference-store', 'ConferenceController@store');
     Route::post('user-store', 'UserController@store');
+    Route::post('user-update', 'UserController@update');
 });    
 
 // Route::middleware(['cors'])->group(function () {

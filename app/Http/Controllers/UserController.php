@@ -40,10 +40,25 @@ class UserController extends Controller
         try {
             $conference = User::create($data);
             DB::commit();
-            return response()->json([ 'result' => true,  'conference' => $conference, 'message' => 'User successfully created!' ], 200);
+            return response()->json([ 'result' => true,  'user' => $conference, 'message' => 'User successfully created!' ], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
         }
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
+        try {
+            $user = User::find($data['id']);
+            $user->update($data);
+            return response()->json([ 'result' => true,  'user' => $user, 'message' => 'User successfully updated!' ], 200);
+        } catch (\Exception $e) {
+            return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
+        }
+        
+        dd($user);
     }
 }
