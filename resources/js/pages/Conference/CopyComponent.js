@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import Tooltip from '@material-ui/core/Tooltip';
 
 function CopyComponent({data}) {
     const [open, setOpen] = React.useState(false);
@@ -17,10 +18,11 @@ function CopyComponent({data}) {
 
     return (
         <React.Fragment>
-            <Button variant="contained" onClick={copyLink} color="primary" >
+            <Tooltip title="Copy  Code" aria-label="copy">
+            <Button color="primary" onClick={copyLink} color="primary" >
                 <FileCopyIcon />
             </Button>
-
+            </Tooltip>
             <Snackbar
                 anchorOrigin={{
                     vertical: 'top',

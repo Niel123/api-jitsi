@@ -89,4 +89,15 @@ export default class API
             }
         });
     }
+
+    static fetchAttendance(parameters = {}) {
+        return axios({
+            method: 'POST',
+            url: Api+'conference-attendance',
+            data: parameters,
+            headers: {
+                'Authorization': `Bearer  ${getCookie("access_token")}`,
+            }
+        });
+    }
 }

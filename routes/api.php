@@ -31,6 +31,7 @@ Route::get('student-list', 'StudentsController@index');
 Route::get('organization-list', 'OrganizationController@index');
 Route::get('conference-list', 'ConferenceController@index');
 Route::get('user-list', 'UserController@index');
+Route::post('conference-attendance', 'ConferenceController@attendance');
 
 Route::group([
     'middleware' => 'auth:api'

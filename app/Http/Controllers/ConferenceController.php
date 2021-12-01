@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Conference;
+use App\Attendance;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
@@ -22,9 +23,9 @@ class ConferenceController extends Controller
         $offset = ($pageno-1) * $no_of_records_per_page;
         $search = $request->search;
         $search_query = '';
-        // if($search !=''){
-        //     $search_query=  "WHERE    CONCAT_ws('-', first_name, middle_name) LIKE '%{$search}%'";
-        // }
+        if($search !=''){
+            $search_query=  "WHERE    CONCAT_ws('-', conference_name) LIKE '%{$search}%'";
+        }
         
         $list  = DB::select('SELECT *  FROM  conferences '. $search_query.' LIMIT '.$offset.', '.$no_of_records_per_page.' ');
         $total_rows = DB::select('SELECT COUNT(*) AS total FROM  conferences  '. $search_query.' ');
@@ -66,5 +67,12 @@ class ConferenceController extends Controller
             return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
         }
     }
+
+    public function attendance(Request $request)
+    {
+        return Attendance::where('conference_id',$request->id)->get();
+    }
+
+    
 
 }

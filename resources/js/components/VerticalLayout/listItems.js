@@ -14,7 +14,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -25,19 +25,19 @@ export const mainListItems = (
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Organization"  />
-    </ListItem>
-    <ListItem button component={Link} to="/class">
+    </ListItem> */}
+    {/* <ListItem button component={Link} to="/class">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Class"  />
-    </ListItem>
-    <ListItem button component={Link} to="/students">
+    </ListItem> */}
+    {/* <ListItem button component={Link} to="/students">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Students"  />
-    </ListItem>
+    </ListItem> */}
     <ListItem button component={Link} to="/conference">
       <ListItemIcon>
         <BarChartIcon />

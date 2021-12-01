@@ -1,16 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
-import ReactDOM from "react-dom";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import FileCopyIcon from '@material-ui/icons/FileCopy';
 import MaterialTable from "material-table";
 import Box from "@material-ui/core/Box";
-import { Api, ENPOINT } from "../../utils/consts";
+import Button from '@material-ui/core/Button';
+import { Api as APILINK } from "../../utils/consts";
+import Api from "../../utils/api";
 import CopyComponent from './CopyComponent';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import Tooltip from '@material-ui/core/Tooltip';
+import AttendanceList from './AttendanceList';
+
+
 
 function TableData({ refresh }) {
     const searchRef = useRef('');
     const tableRef = React.createRef();
+
+    const [open, setOpen] = React.useState(false);
+    const[attenadance,setAttendance] = useState([])
 
     useEffect(() => {
         if (refresh) {
@@ -27,6 +35,17 @@ function TableData({ refresh }) {
         searchRef.current = value.target.value
         tableRef.current && tableRef.current.onQueryChange();
     }
+
+
+    const view_attendance = (value) => {
+        Api.fetchAttendance({id: value?.id})
+        .then(result => {
+           setAttendance(result.data)
+           setOpen(true)
+        })
+    }
+
+
 
     return (
         <React.Fragment>
@@ -46,7 +65,7 @@ function TableData({ refresh }) {
                     components={{
                         Container: props => <Paper {...props} elevation={0}/>
                    }}
-                   
+
                     options={{
                         paging: true,
                         search: false,
@@ -58,26 +77,48 @@ function TableData({ refresh }) {
                         debounceInterval: 500
                     }}
                     columns={[
-                        { title: "ID", field: "id" },
-                        { title: "Conference Link", field: "conference_name" },
+                        { title: "Conference ID", field: "conf_id", width: "10%" },
+                        { title: "Conference Name", field: "conference_name" ,width: "90%"},
                         {
                             field: "conference_link",
                             title: 'Actions',
-                            render: rowData => <CopyComponent data={rowData} />,
+                            cellStyle: {
+                                width: 200
+                              },
+                            render: rowData => 
+                            <>
+                               
+                                <CopyComponent data={rowData} />
+                                <Tooltip title="View Attendace" aria-label="add">
+                                    <Button color="primary" onClick={() => view_attendance(rowData)} ><PeopleOutlineIcon /></Button>
+                                </Tooltip>
+                            </>
+                            ,
+                         
                         }
                     ]}
                     onSearchChange={setSearch}
                     data={query =>
                         new Promise((resolve, reject) => {
-                            let url = `${Api}conference-list?`;
+                            let url = `${APILINK}conference-list?`;
                             url += "per_page=" + query.pageSize;
                             url += "&page=" + (query.page + 1);
                             url += "&search=" + searchRef.current;
                             fetch(url)
                                 .then(response => response.json())
-                                .then(result => {
+                                .then(result => { 
+                                    let new_data = []
+                                   let  list_returns = result.data
+                                    for (let index = 0; index < list_returns.length; index++) {
+                                       new_data.push({
+                                          id: list_returns[index].id,
+                                           conf_id: 'CONF-'+list_returns[index].id,
+                                           conference_name: list_returns[index].conference_name,
+                                       })
+                                        
+                                    }
                                     resolve({
-                                        data: result.data,
+                                        data: new_data,
                                         page: result.page - 1,
                                         totalCount: result.total
                                     });
@@ -86,6 +127,7 @@ function TableData({ refresh }) {
                     }
                 />
             </Paper>
+            <AttendanceList open={open} attenadance={attenadance} handleClose={()=> setOpen(false)}  />
         </React.Fragment>
     );
 }

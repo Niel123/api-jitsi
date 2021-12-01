@@ -22,7 +22,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Vcon
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -83,7 +83,7 @@ export default function SignInSide() {
             .then((result) => { 
                 setCookie(["access_token", result.data.access_token]);
                 setCookie(["userLogin", JSON.stringify(result.data.user)]);
-                window.location.href = "/dashboard";
+                window.location.href = "/conference";
             })
             .catch((error) => {
                 if (error.response) {
@@ -165,12 +165,12 @@ export default function SignInSide() {
                                 })
                             }
                         />
-                        <FormControlLabel
+                        {/* <FormControlLabel
                             control={
                                 <Checkbox value="remember" color="primary" />
                             }
                             label="Remember me"
-                        />
+                        /> */}
                         <Button
                             type="submit"
                             fullWidth
@@ -180,7 +180,7 @@ export default function SignInSide() {
                         >
                             Sign In
                         </Button>
-                        <Grid container>
+                        {/* <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
                                     Forgot password?
@@ -191,7 +191,7 @@ export default function SignInSide() {
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                         <Box mt={5}>
                             <Copyright />
                         </Box>

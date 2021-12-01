@@ -8,7 +8,6 @@ import "./assets/scss/custom-style.scss";
 
 import { teal } from "@material-ui/core/colors";
 
-import Posts from "./components/Posts";
 
 import { authRoutes, userRoutes, noLayoutRoutes } from "./routes/allRoutes";
 
