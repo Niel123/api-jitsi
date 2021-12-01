@@ -100,4 +100,15 @@ export default class API
             }
         });
     }
+    static userUpdate(parameters = {})
+    {  
+        return axios({
+            method: 'post',
+            url: Api+'user-update',
+            data: parameters,
+             headers: {
+                'Authorization': `Bearer  ${getCookie("access_token")}`,
+            }
+        });
+    }
 }

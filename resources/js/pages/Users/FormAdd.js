@@ -12,7 +12,7 @@ import { UniversalValidator } from "../../utils/helper";
 
 
 
-function FormAdd({ open, close, submit_form, is_submit, reset_form }) {
+function FormAdd({ open, close, submit_form, is_submit, reset_form, update_data }) {
 
     const [state, setstate] = useState({
         first_name: "",
@@ -43,7 +43,24 @@ function FormAdd({ open, close, submit_form, is_submit, reset_form }) {
                 roleError: "",
             });
         }
-    }, [reset_form])
+        if(update_data.id) {
+            const arr_name = update_data.name.split(' ');
+            const f_name = arr_name[0];
+            let l_name = '';
+            if (arr_name.length > 1) {
+                arr_name.splice(0, 1);
+                l_name = arr_name.toString().replace(/,/g, " ");
+            }
+
+            setstate({
+                ...state,
+                first_name: f_name,
+                last_name: l_name,
+                email: update_data.email,
+                role: update_data.role,
+            });
+        }
+    }, [reset_form, update_data])
 
     const roleList = [
         { name: 'Admin', value: 1 },
@@ -102,9 +119,9 @@ function FormAdd({ open, close, submit_form, is_submit, reset_form }) {
             email: state.email,
             role: state.role,
         };
+        if(update_data.id) params.id = update_data.id;
         submit_form(params);
     };
-
 
     return (
         <React.Fragment>
