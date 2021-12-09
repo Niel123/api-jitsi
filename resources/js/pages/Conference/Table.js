@@ -10,8 +10,7 @@ import CopyComponent from './CopyComponent';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import AttendanceList from './AttendanceList';
-
-
+import AttendanceLogModal from './AttendanceLogModal';
 
 function TableData({ refresh }) {
     const searchRef = useRef('');
@@ -78,21 +77,21 @@ function TableData({ refresh }) {
                     }}
                     columns={[
                         { title: "Conference ID", field: "conf_id", width: "10%" },
-                        { title: "Conference Name", field: "conference_name" ,width: "90%"},
+                        { title: "Conference Name", field: "conference_name" ,width: "80%"},
                         {
                             field: "conference_link",
                             title: 'Actions',
                             cellStyle: {
-                                width: 200
+                                width: 300
                               },
                             render: rowData => 
-                            <>
-                               
+                            <div>
                                 <CopyComponent data={rowData} />
                                 <Tooltip title="View Attendace" aria-label="add">
                                     <Button color="primary" onClick={() => view_attendance(rowData)} ><PeopleOutlineIcon /></Button>
                                 </Tooltip>
-                            </>
+                                <AttendanceLogModal />
+                            </div>
                             ,
                          
                         }

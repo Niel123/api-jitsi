@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Students;
+use App\Conference;
+use App\AttendanceLog;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use Carbon\Carbon;
 
 class StudentsController extends Controller
 {
@@ -68,6 +71,34 @@ class StudentsController extends Controller
             DB::rollback();
             return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
         }
+    }
+
+    public function studentListUpdate(Request $request) {
+        // $data = $request->all();
+        $conference_data = Conference::where('conference_name', $request->roomName)
+            ->whereDate('created_at', Carbon::today());
+        if($conference_data->count() > 0) {
+            $conf_data = $conference_data->first();
+
+            $log = new AttendanceLog;
+            $log->conference_id = $conf_data->id;
+            $log->date_id = $request->uuid;
+            $log->students_json = json_encode($request->studentList);
+            $log->room_name = $request->roomName;
+            $log->save();
+
+            return $log;
+
+        } else {
+
+        }
+        // return $request->all();
+        return $conference_data;
+    }
+
+    public function getStudentLogs(Request $request) {
+        return AttendanceLog::where('conference_id', $request->id)->get();
+        // return $log;
     }
 
     /**
