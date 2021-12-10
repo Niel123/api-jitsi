@@ -32,7 +32,7 @@ class JoinCallController extends Controller
         ->where(DB::raw('lower(conference_name)'), strtolower($conference_name))
         ->first();
         if($conference){
-            $attendance_check = Attendance::where('name', '=', $request->participants_name['name'])->first();
+            $attendance_check = Attendance::where('name', '=', $request->participants_name['name'])->where('conference_id',$conference->id)->first();
             if (!$attendance_check) {
                 try {
                     $attendance = Attendance::create([ 
@@ -40,6 +40,14 @@ class JoinCallController extends Controller
                         'name'     =>$request->participants_name['name'],
                     ]);
                     return response()->json([ 'result' => true, 'message' => 'Attendace successully saved!' ], 200);
+                } catch (\Exception $e) {
+                    return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
+                }
+            }else{
+
+                try {
+                    Attendance::where('name', '=', $request->participants_name['name'])->where('conference_id',$conference->id)->update(['last_attendance'=> date('Y-m-d h:i:s')]);
+                    return response()->json([ 'result' => true, 'message' => 'Attendace successully updated!' ], 200);
                 } catch (\Exception $e) {
                     return response()->json([ 'result' => false, 'message' => $e->getMessage() ], 400);
                 }

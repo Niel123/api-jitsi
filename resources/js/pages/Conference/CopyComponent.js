@@ -9,7 +9,7 @@ function CopyComponent({data}) {
 
     const copyLink = () => {
         setOpen(true);
-        navigator.clipboard.writeText(data.conference_link)
+        navigator.clipboard.writeText(data.conference_name)
     }
 
     const handleClose = () => {

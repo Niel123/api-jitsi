@@ -39,7 +39,7 @@ class Schools extends Component {
             room_link: process.env.MIX_JITSI_URL + form.room_name
         };
         this.setState({is_submit: true})
-        Api.fetchAttendance(dataTOSubmit)
+        Api.conferenceSave(dataTOSubmit)
             .then(result => {
                 const { data } = result;
                 if (data.result) {

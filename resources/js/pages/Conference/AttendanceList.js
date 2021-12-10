@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -31,7 +32,7 @@ export default function AttendanceList({open, attenadance, handleClose}) {
         <DialogContent>
             {attenadance.map((obj,i) => 
             <div key={i}  >
-                <ListComponent  obj={obj} name={obj.name}  date={obj.last_attendance} />
+                <ListComponent  obj={obj} name={obj.name}  date={moment(obj.last_attendance).format('MMM DD, hh:mm:ss A')} />
             </div>
             )}
             {attenadance.length == 0 ? 'No Attendees!':''}

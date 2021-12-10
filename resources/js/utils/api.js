@@ -78,17 +78,6 @@ export default class API
             }
         });
     }
-    static userSave(parameters = {})
-    {  
-        return axios({
-            method: 'post',
-            url: Api+'user-store',
-            data: parameters,
-             headers: {
-                'Authorization': `Bearer  ${getCookie("access_token")}`,
-            }
-        });
-    }
 
     static fetchAttendance(parameters = {}) {
         return axios({
@@ -96,6 +85,18 @@ export default class API
             url: Api+'conference-attendance',
             data: parameters,
             headers: {
+                 'Authorization': `Bearer  ${getCookie("access_token")}`,
+            }
+        });
+    }
+    
+    static userSave(parameters = {})
+    {  
+        return axios({
+            method: 'post',
+            url: Api+'user-store',
+            data: parameters,
+             headers: {
                 'Authorization': `Bearer  ${getCookie("access_token")}`,
             }
         });
