@@ -28,10 +28,14 @@ Route::post('join-call', 'JoinCallController@index');
 Route::post('update-attendace', 'JoinCallController@updateAttendance');
 Route::post('organization-store', 'OrganizationController@store');
 Route::get('student-list', 'StudentsController@index');
+Route::get('student-log/{id}', 'StudentsController@getStudentLogs');
 Route::get('organization-list', 'OrganizationController@index');
 Route::get('conference-list', 'ConferenceController@index');
 Route::get('user-list', 'UserController@index');
 Route::post('conference-attendance', 'ConferenceController@attendance');
+
+// API webhook
+Route::post('update-student-list', 'StudentsController@studentListUpdate');
 
 Route::group([
     'middleware' => 'auth:api'
