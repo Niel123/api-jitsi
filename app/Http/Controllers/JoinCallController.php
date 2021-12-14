@@ -20,8 +20,8 @@ class JoinCallController extends Controller
         if(!$conference){
             return response()->json("Room name is not exist", 403);
         }
-        //return 'https://jitsi.blue-label.link/'.$request->conference_name.'#userInfo.displayName='.$request->name.'';
-        return 'https://127.0.0.1:8080/'.$request->conference_name.'#userInfo.displayName='.$request->name.'';
+        return 'https://jitsi.blue-label.link/'.$request->conference_name.'#userInfo.displayName='.$request->name.'';
+      //  return 'https://127.0.0.1:8080/'.$request->conference_name.'#userInfo.displayName='.$request->name.'';
 
     }
 

@@ -10,8 +10,10 @@ import CopyComponent from './CopyComponent';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Tooltip from '@material-ui/core/Tooltip';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import AttendanceList from './AttendanceList';
 import AttendanceLogModal from './AttendanceLogModal';
+import LoginHistoryModal from './LoginHistoryModal';
 
 function TableData({ refresh }) {
     const searchRef = useRef('');
@@ -87,7 +89,7 @@ function TableData({ refresh }) {
                             field: "conference_link",
                             title: 'Actions',
                             cellStyle: {
-                                width: 300
+                                width: 400
                               },
                             render: rowData => 
                             <div>
@@ -95,10 +97,11 @@ function TableData({ refresh }) {
                                 <Tooltip title="View Attendace" aria-label="add">
                                     <Button color="primary" onClick={() => view_attendance(rowData)} ><PeopleOutlineIcon /></Button>
                                 </Tooltip>
-                                <AttendanceLogModal />
                                 <Tooltip title="Export  Data" aria-label="add">
                                     <Button color="primary" onClick={() => export_attendance(rowData)} ><GetAppIcon /></Button>
                                 </Tooltip>
+                                <AttendanceLogModal userData={rowData} />
+                                <LoginHistoryModal conf_data={rowData} />
                             </div>
                             ,
                          

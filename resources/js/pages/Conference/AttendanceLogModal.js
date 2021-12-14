@@ -20,6 +20,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import PersonIcon from '@material-ui/icons/Person';
 import SearchIcon from '@material-ui/icons/Search';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Api as APILINK } from "../../utils/consts";
 
@@ -39,7 +40,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function FullScreenDialog({userData}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [studentDetail, setOpenStudentDetail] = React.useState(false);
@@ -64,7 +65,6 @@ export default function FullScreenDialog() {
     };
 
     const ListingStudent = ({data}) => {
-        console.log('data', )
         const listing = data.student_list;
         return (
             <>
@@ -79,7 +79,7 @@ export default function FullScreenDialog() {
         <React.Fragment>
             <Tooltip title="View Details" aria-label="add">
                 <Button color="primary" onClick={handleClickOpen}>
-                    <SearchIcon />
+                    <VisibilityIcon />
                 </Button>
             </Tooltip>
 
@@ -119,13 +119,11 @@ export default function FullScreenDialog() {
                         ]}
                         data={query =>
                             new Promise((resolve, reject) => {
-                                let url = `${APILINK}student-log/1`;
+                                let url = `${APILINK}student-log/${userData.id}`;
                                 fetch(url)
                                     .then(response => response.json())
                                     .then(result => {
                                         let new_data = []
-
-                                        console.log('res', result);
                                         let cnt = 0;
 
                                         for (let index = 0; index < result.length; index++) {

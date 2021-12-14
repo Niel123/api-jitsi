@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\AttendanceLog;
+use App\LoginHistory;
 use DateTime;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -40,20 +40,15 @@ class AttendaceHistoryExport implements
 
     public function query()
     {  
-       return  AttendanceLog::where('conference_id',$this->id);
+       return  LoginHistory::where('conference_id',$this->id);
     }
 
     public function map($list): array
     {
-        $attendees = '';
-        if($list->students_json){
-            $json = json_decode($list->students_json);
-            $attendees = implode(", ", $json);
-        }
        
         return [
             date("F j, Y, g:i a",strtotime($list->created_at)),
-            $attendees,
+            $list->student_name,
         ];
     }
 
@@ -86,6 +81,6 @@ class AttendaceHistoryExport implements
 
     public function title(): string
     {
-        return "Attendance History";
+        return "Login History";
     }
 }

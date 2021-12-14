@@ -27,7 +27,7 @@ class ExportController extends Controller
         $decode_id =  base64_decode($request->id);
 		if(!$decode_id)
         {
-            abort(4404, 'Page not found!');
+            abort(404, 'Page not found!');
         }
         //return  Attendance::where('conference_id',$decode_id)->orderBy('last_attendance','desc')->groupBy('name')->get();
        return Excel::download(new UserMultiSheetExport($decode_id), 'attendance-export.xlsx');
