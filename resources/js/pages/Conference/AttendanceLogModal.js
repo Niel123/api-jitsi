@@ -39,7 +39,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function FullScreenDialog() {
+export default function FullScreenDialog({userData}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [studentDetail, setOpenStudentDetail] = React.useState(false);
@@ -48,6 +48,8 @@ export default function FullScreenDialog() {
     const handleClickOpen = () => {
         setOpen(true);
     };
+
+    console.log('userData', userData)
 
     const handleClose = () => {
         setOpen(false);
@@ -119,7 +121,7 @@ export default function FullScreenDialog() {
                         ]}
                         data={query =>
                             new Promise((resolve, reject) => {
-                                let url = `${APILINK}student-log/1`;
+                                let url = `${APILINK}student-log/${userData.id}`;
                                 fetch(url)
                                     .then(response => response.json())
                                     .then(result => {
