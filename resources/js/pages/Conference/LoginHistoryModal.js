@@ -123,8 +123,6 @@ export default function FullScreenDialog({conf_data}) {
                                         let new_data = []
                                         let cnt = 0;
 
-                                        console.log('res', result)
-
                                         for (let index = 0; index < result.length; index++) {
                                             cnt += 1;
                                             new_data.push({
@@ -133,7 +131,7 @@ export default function FullScreenDialog({conf_data}) {
                                                 detail: result[index],
                                             });
                                         }
-                                        console.log('new_data', new_data)
+                                        
                                         resolve({
                                             data: new_data,
                                             page: result.page - 1,
@@ -170,8 +168,6 @@ export default function FullScreenDialog({conf_data}) {
                                     .then(result => {
                                         let new_data = []
                                         let cnt = 0;
-
-                                        console.log('resssss', result)
 
                                         for (let index = 0; index < result.length; index++) {
                                             cnt += 1;

@@ -49,8 +49,6 @@ export default function FullScreenDialog({userData}) {
         setOpen(true);
     };
 
-    console.log('userData', userData)
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -66,7 +64,6 @@ export default function FullScreenDialog({userData}) {
     };
 
     const ListingStudent = ({data}) => {
-        console.log('data', )
         const listing = data.student_list;
         return (
             <>
@@ -126,8 +123,6 @@ export default function FullScreenDialog({userData}) {
                                     .then(response => response.json())
                                     .then(result => {
                                         let new_data = []
-
-                                        console.log('res', result);
                                         let cnt = 0;
 
                                         for (let index = 0; index < result.length; index++) {
