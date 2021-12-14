@@ -47,6 +47,10 @@ Route::group([
     Route::post('user-update', 'UserController@update');
 });    
 
+Route::get('export-attendance', 'ExportController@exportMultiple');
+
+
+//Route::get('client-data-export/{id}/{time}', [ExportClientController::class, 'exportMultiple']);
 // Route::middleware(['cors'])->group(function () {
 //     Route::get('join-call', 'JoinCallController@index');
 // });

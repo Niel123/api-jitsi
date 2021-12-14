@@ -8,6 +8,7 @@ import { Api as APILINK } from "../../utils/consts";
 import Api from "../../utils/api";
 import CopyComponent from './CopyComponent';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import Tooltip from '@material-ui/core/Tooltip';
 import AttendanceList from './AttendanceList';
 import AttendanceLogModal from './AttendanceLogModal';
@@ -42,6 +43,10 @@ function TableData({ refresh }) {
            setAttendance(result.data)
            setOpen(true)
         })
+    }
+
+    const export_attendance = (value) =>{
+        window.open('/api/export-attendance?id='+btoa(value.id));
     }
 
 
@@ -91,6 +96,9 @@ function TableData({ refresh }) {
                                     <Button color="primary" onClick={() => view_attendance(rowData)} ><PeopleOutlineIcon /></Button>
                                 </Tooltip>
                                 <AttendanceLogModal />
+                                <Tooltip title="Export  Data" aria-label="add">
+                                    <Button color="primary" onClick={() => export_attendance(rowData)} ><GetAppIcon /></Button>
+                                </Tooltip>
                             </div>
                             ,
                          
