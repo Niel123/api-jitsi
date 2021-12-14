@@ -74,7 +74,6 @@ class StudentsController extends Controller
     }
 
     public function studentListUpdate(Request $request) {
-        // $data = $request->all();
         $conference_data = Conference::where('conference_name', $request->roomName)
             ->whereDate('created_at', Carbon::today());
         if($conference_data->count() > 0) {
@@ -90,10 +89,8 @@ class StudentsController extends Controller
             return $log;
 
         } else {
-
+            return response()->json([ 'fail' => true, 'err' => 'room does not exist' ]); 
         }
-        // return $request->all();
-        return $conference_data;
     }
 
     public function getStudentLogs(Request $request) {

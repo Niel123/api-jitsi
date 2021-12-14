@@ -33,6 +33,9 @@ Route::get('organization-list', 'OrganizationController@index');
 Route::get('conference-list', 'ConferenceController@index');
 Route::get('user-list', 'UserController@index');
 Route::post('conference-attendance', 'ConferenceController@attendance');
+Route::post('login-history', 'LoginHistoryController@create');
+Route::get('user-histories/{id}', 'LoginHistoryController@userHistories');
+Route::get('user-login-history/{room_name}/{student_name}/{conference_id}', 'LoginHistoryController@getHistory');
 
 // API webhook
 Route::post('update-student-list', 'StudentsController@studentListUpdate');
