@@ -35,7 +35,7 @@ class Schools extends Component {
 
     save_form(form){ 
         const dataTOSubmit = {
-            room_name: form.room_name,
+            room_name: form?.room_name.replace(/[&\/\\#,+()$~%.'":*?<>{}-]/g, ''),
             room_link: process.env.MIX_JITSI_URL + form.room_name
         };
         this.setState({is_submit: true})

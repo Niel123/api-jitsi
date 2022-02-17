@@ -97,11 +97,11 @@ function TableData({ refresh }) {
                                 <Tooltip title="View Attendace" aria-label="add">
                                     <Button color="primary" onClick={() => view_attendance(rowData)} ><PeopleOutlineIcon /></Button>
                                 </Tooltip>
+                                <AttendanceLogModal userData={rowData} />
+                                <LoginHistoryModal conf_data={rowData} />
                                 <Tooltip title="Export  Data" aria-label="add">
                                     <Button color="primary" onClick={() => export_attendance(rowData)} ><GetAppIcon /></Button>
                                 </Tooltip>
-                                <AttendanceLogModal userData={rowData} />
-                                <LoginHistoryModal conf_data={rowData} />
                             </div>
                             ,
                          

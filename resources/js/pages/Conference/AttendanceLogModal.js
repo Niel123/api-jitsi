@@ -153,7 +153,7 @@ export default function FullScreenDialog({userData}) {
 
             </Dialog>
 
-            <Dialog onClose={handleCloseStudentDetail} aria-labelledby="simple-dialog-title" open={studentDetail}>
+            <Dialog  fullWidth maxWidth="sm" onClose={handleCloseStudentDetail} aria-labelledby="simple-dialog-title" open={studentDetail}>
                     <DialogTitle id="simple-dialog-title">Student List</DialogTitle>
                     <List>
                         {studentList.map((name) => (

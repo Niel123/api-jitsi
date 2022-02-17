@@ -71,7 +71,7 @@ function FormAdd({open, close, submit_form, is_submit, reset_form}) {
                             value={state.name}
                             type={"text"}
                             label="Conference"
-                            placeholder="e.g. RoomName, room-name"
+                            placeholder="e.g. RoomName, roomname, roomName"
                             helperText={""}
                             isError={state.nameError}
                             handleChange={event =>

@@ -46,8 +46,9 @@ class AttendanceExport implements
     public function map($list): array
     {
         return [
-            $list->name,
             date("F j, Y, g:i a",strtotime($list->last_attendance)),
+            $list->name,
+          
         ];
     }
 

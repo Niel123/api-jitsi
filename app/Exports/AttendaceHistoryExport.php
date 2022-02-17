@@ -55,8 +55,8 @@ class AttendaceHistoryExport implements
     public function headings(): array
     {
         return [
-            "Name",
             "Date",
+            "Name",
         ];
     }
 
